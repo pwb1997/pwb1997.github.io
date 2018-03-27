@@ -1,0 +1,43 @@
+@font-face {
+    font-family: octin;
+    src: url(octin.ttf);
+}
+
+body {
+  background: black;
+}
+
+.window .terminal {
+  padding: 100px;
+  color: white;
+  font-family: 'octin';
+  font-size: 20px;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow-y: auto;
+  line-height: 150%;
+}
+.window .terminal::after {
+  content: "|";
+  font-size: 25px;
+  animation: blink 2s steps(1) infinite;
+}
+
+.prompt {
+  color: #5ed7ff;
+}
+
+.path {
+  color: #5ed7ff;
+}
+
+@keyframes blink {
+  50% {
+    color: transparent;
+  }
+}
