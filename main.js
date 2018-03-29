@@ -60,7 +60,7 @@ Alternatively, 'random' command will take you to a random directory.
 
     function random() {
         var magicNum = Math.floor(Math.random() * posts.length);
-        terminal.append("Opening '" + posts[magicNum] + "' ...\n");
+        terminal.append("Opening '" + posts[magicNum].name + "' ...\n");
         window.location.href = "posts/" + posts[magicNum].url + ".html";
     }
 
