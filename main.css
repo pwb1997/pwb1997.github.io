@@ -1,6 +1,6 @@
 @font-face {
-    font-family: octin;
-    src: url(octin.ttf);
+    font-family: iosevka;
+    src: url(iosevka.ttf);
 }
 
 body {
@@ -10,7 +10,7 @@ body {
 .window .terminal {
   padding: 100px;
   color: white;
-  font-family: 'octin';
+  font-family: 'iosevka';
   font-size: 20px;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
@@ -24,7 +24,7 @@ body {
 }
 .window .terminal::after {
   content: "|";
-  font-size: 25px;
+  font-size: 20px;
   animation: blink 2s steps(1) infinite;
 }
 

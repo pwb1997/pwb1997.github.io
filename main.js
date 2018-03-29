@@ -21,15 +21,41 @@ To start, type "help" to see the supported commands.
     }
 
     function help() {
-        terminal.append(``);
+        terminal.append(`Commands:
+
+about          get my basic information
+contact        get my email and github
+ls             list all my works
+cd             enter a work directory
+random         randomly enter a work directory
+`);
     }
 
     function ls() {
-        terminal.append(``);
+        var list = "";
+        for (var i = 0; i < posts.length; i++) {
+            list += i + 1;
+            list += ". ";
+            if (i < 9) {
+                list += " ";
+            }
+            list += posts[i].name + "\n";
+        }
+        list += `
+Hint: to enter a directory, use 'cd' command with an index.
+For example, 'cd 1' will take you to 'Dirty Instrument'.
+Alternatively, 'random' command will take you to a random directory.
+`;
+        terminal.append(list);
     }
 
-    function cd() {
-        terminal.append(``);
+    function cd(args) {
+        if (!(/^\+?(0|[1-9]\d*)$/.test(args)) || args > posts.length || args < 1) {
+            terminal.append("Invalid index, please pick a number from 1 to " + posts.length + "\n");
+        } else {
+            terminal.append("Opening '" + posts[args - 1].name + "' ... \n");
+            window.location.href = "posts/" + posts[args - 1].url + ".html";
+        }
     }
 
     function random() {
@@ -41,9 +67,6 @@ To start, type "help" to see the supported commands.
     var terminal = $(".terminal");
     var prompt = "puwei.bao@nyu";
     var path = ">";
-
-    var commandHistory = [];
-    var historyIndex = 0;
 
     var command = "";
     var commands = [{
@@ -63,11 +86,28 @@ To start, type "help" to see the supported commands.
         "function": ls
     }, {
         "name": "cd",
-        "function": ls
+        "function": cd
     }, {
         "name": "random",
         "function": random
     }];
+
+    var posts = [{
+        "name": "Dirty Instrument",
+        "url": "dirty-instrument"
+    }, {
+        "name": "Face Mapping",
+        "url": "face-mapping"
+    }, {
+        "name": "Algorithmic Music",
+        "url": "algorithmic-music"
+    }, {
+        "name": "Stock Tracker",
+        "url": "stock-tracker"
+    }, {
+        "name": "NYU Courses Crawler",
+        "url": "nyu-courses-crawler"
+    }]
 
     function processCommand() {
         var isValid = false;
@@ -93,12 +133,12 @@ To start, type "help" to see the supported commands.
 
         // No match was found...
         if (!isValid) {
-            terminal.append("command not found\n");
+            terminal.append("\ncommand not found\n");
         }
 
-        // Add to command history and clean up.
-        commandHistory.push(command);
-        historyIndex = commandHistory.length;
+        $("html, body").animate({ scrollTop: $(document).height() }, 200);
+
+        // Clean up.
         command = "";
     }
 
@@ -160,6 +200,6 @@ To start, type "help" to see the supported commands.
     });
 
     // Display Initial Message
-    terminal.append("Hi there, I'm Puwei.\nIf you are not sure what to do, just start with typing 'about'.\n");
+    clear();
     displayPrompt();
 });
