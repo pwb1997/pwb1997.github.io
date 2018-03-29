@@ -59,7 +59,9 @@ Alternatively, 'random' command will take you to a random directory.
     }
 
     function random() {
-        terminal.append(``);
+        magicNum = Math.floor(Math.random() * posts.length);
+        terminal.append("Opening '" + posts[magicNum] + "' ...\n");
+        window.location.href = "posts/" + posts[magicNum].url + ".html";
     }
 
     // END COMMANDS
